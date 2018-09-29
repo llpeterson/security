@@ -154,10 +154,10 @@ to find the right one, giving 2$$^{55}$$ = 3.6 $$\times$$ 10$$^{16}$$
 keys. That may sound like a lot, but such a search is highly parallelizable,
 so it's possible to throw as many computers at the task as you can get your
 hands on—and these days it's easy to lay your hands on thousands of
-computers (Amazon.com will rent them to you for a few cents an hour, for
-example). By the late 1990s, it was already possible to recover a DES
-key after a few hours. Consequently, NIST updated the DES standard in
-1999 to indicate that DES should only be used for legacy systems.
+computers. (Amazon will rent them to you for a few cents an hour.) By
+the late 1990s, it was already possible to recover a DES key after a
+few hours. Consequently, NIST updated the DES standard in 1999 to
+indicate that DES should only be used for legacy systems.
 
 NIST also standardized the cipher *Triple DES* (3DES), which leverages
 the cryptanalysis resistance of DES while in effect increasing the key

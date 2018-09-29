@@ -13,15 +13,17 @@ placed on a website, for example, then the replayed message would appear
 to the website as though you had ordered more of the same. Even though
 it wasn't the original incarnation of the message, its authenticator
 would still be valid; after all, the message was created by you, and it
-wasn't modified. In a variation of this attack called a *suppress-replay
-attack*, an adversary might merely delay your message (by intercepting
-and later replaying it), so that it is received at a time when it is no
-longer appropriate. For example, an adversary could delay your order to
-buy stock from an auspicious time to a time when you would not have
-wanted to buy. Although this message would in a sense be the original,
-it wouldn't be timely. Originality and timeliness may be considered
-aspects of integrity. Ensuring them will in most cases require a
-nontrivial, back-and-forth protocol.
+wasn't modified. Clearly, we need the solution that ensures
+*originality*.  In a variation of this attack called a
+*suppress-replay attack*, an adversary might merely delay your message
+(by intercepting and later replaying it), so that it is received at a
+time when it is no longer appropriate. For example, an adversary could
+delay your order to buy stock from an auspicious time to a time when
+you would not have wanted to buy. Although this message would in a
+sense be the original, it wouldn't be timely. So we also need to ensure
+*timeliness*. Originality and timeliness may be considered aspects of
+integrity. Ensuring them will in most cases require a nontrivial,
+back-and-forth protocol.
 
 The other problem we have not yet solved is how to establish a session
 key. A session key is a symmetric-key cipher key generated on the fly
