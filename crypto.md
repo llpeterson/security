@@ -169,13 +169,13 @@ performed by first DES encrypting the block using DES-key1, then DES
 result using DES-key3. Decryption involves decrypting using DES-key3,
 then encrypting using DES-key2, then decrypting using DES-key1.
 
-> The reason 3DES encryption uses DES *de*cryption with DES-key2 is 
-> to interoperate with legacy DES systems. If a legacy DES system uses 
-> a single key, then a 3DES system can perform the same encryption 
-> function by using that key for each of DES-key1, DES-key2, and 
-> DES-key3; in the first two steps, we encrypt and then decrypt with 
-> the same key, producing the original plaintext, which we then 
-> encrypt again.
+The reason 3DES encryption uses DES *de*cryption with DES-key2 is 
+to interoperate with legacy DES systems. If a legacy DES system uses 
+a single key, then a 3DES system can perform the same encryption 
+function by using that key for each of DES-key1, DES-key2, and 
+DES-key3; in the first two steps, we encrypt and then decrypt with 
+the same key, producing the original plaintext, which we then 
+encrypt again.
 
 Although 3DES solves DES's key-length problem, it inherits some other
 shortcomings. Software implementations of DES/3DES are slow because it
@@ -183,16 +183,16 @@ was originally designed, by IBM, for implementation in hardware. Also,
 DES/3DES uses a 64-bit block size; a larger block size is more efficient
 and more secure.
 
-3DES is being superseded by the *Advanced Encryption Standard* (AES)
-standard issued by NIST in 2001. The cipher selected to become that
-standard (with a few minor modifications) was originally named Rijndael
-(pronounced roughly like "Rhine dahl") based on the names of its
-inventors, Daemen and Rijmen. AES supports key lengths of 128, 192, or
-256 bits, and the block length is 128 bits. AES permits fast
-implementations in both software and hardware. It doesn't require much
-memory, which makes it suitable for small mobile devices. AES has some
-mathematically proven security properties and, as of the time of
-writing, has not suffered from any significant successful attacks.
+3DES is now being superseded by the *Advanced Encryption Standard* (AES)
+standard issued by NIST. The cipher underlying AES (with a few minor
+modifications) was originally named Rijndael (pronounced roughly like
+"Rhine dahl") based on the names of its inventors, Daemen and
+Rijmen. AES supports key lengths of 128, 192, or 256 bits, and the
+block length is 128 bits. AES permits fast implementations in both
+software and hardware. It doesn't require much memory, which makes it
+suitable for small mobile devices. AES has some mathematically proven
+security properties and, as of the time of writing, has not suffered
+from any significant successful attacks.
 
 > Since anything that can recover the plaintext with less 
 > computational effort than sheer brute force is technically 
@@ -232,8 +232,8 @@ channels. A key for a symmetric-key cipher provides a channel that is
 two-way between two participants—each participant holds the same
 (symmetric) key that either one can use to encrypt or decrypt messages
 in either direction. A public/private key pair, in contrast, provides a
-channel that is one way and many to one from everyone who has the public
-key to the (unique) owner of the private key, as illustrated in
+channel that is one way and many-to-one: from everyone who has the public
+key to the unique owner of the private key, as illustrated in
 [Figure 3](#public).
 
 An important additional property of public-key ciphers is that the
@@ -312,19 +312,19 @@ integrity of a message. We will see how authenticators can be used in
 protocols. For now, we focus on the algorithms that produce
 authenticators.
 
-You should recall that in earlier chapters we looked at checksums and
-cyclic redundancy checks (CRCs)—added pieces of information sent with
-the original message—as ways of detecting when a message has been
-inadvertently modified by bit errors. A similar concept applies to
-authenticators, with the added challenge that the corruption of the
-message is likely to be deliberately performed by someone who wants the
-corruption to go undetected. To support authentication, an authenticator
-includes some proof that whoever created the authenticator knows a
-secret that is known only to the alleged sender of the message; for
-example, the secret could be a key, and the proof could be some value
-encrypted using the key. There is a mutual dependency between the form
-of the redundant information and the form of the proof of secret
-knowledge. We discuss several workable combinations.
+You may recall that checksums and cyclic redundancy checks (CRCs) are
+pieces of information added to a message so the receiver detect when the
+message has been inadvertently modified by bit errors. A similar
+concept applies to authenticators, with the added challenge that the
+corruption of the message is likely to be deliberately performed by
+someone who wants the corruption to go undetected. To support
+authentication, an authenticator includes some proof that whoever
+created the authenticator knows a secret that is known only to the
+alleged sender of the message; for example, the secret could be a key,
+and the proof could be some value encrypted using the key. There is a
+mutual dependency between the form of the redundant information and
+the form of the proof of secret knowledge. We discuss several workable
+combinations.
 
 We initially assume that the original message need not be
 confidential—that a transmitted message will consist of the plaintext

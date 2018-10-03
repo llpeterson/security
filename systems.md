@@ -8,7 +8,7 @@ systems that use these components.
 
 These systems can be roughly categorized by the protocol layer at which
 they operate. Systems that operate at the application layer include
-Pretty Good Privacy (PGP), whiwch provides electronic mail security, and
+Pretty Good Privacy (PGP), which provides electronic mail security, and
 Secure Shell (SSH), a secure remote login facility. At the transport
 layer, there is the IETF's Transport Layer Security (TLS) standard and
 the older protocol from which it derives, Secure Socket Layer (SSL). The
@@ -128,19 +128,21 @@ applications that use it; you need to figure out which from the context.
 
 To better appreciate the importance of SSH on today's Internet, consider
 a couple of the scenarios where it is used. Telecommuters, for example,
-often subscribe to ISPs that offer high-speed cable modem or DSL
-service, and they use these ISPs, and some chain of other ISPs as well,
-to reach machines operated by their employer. This means that when a
-telecommuter logs into a machine inside his employer's data center, both
-the passwords and all the data sent or received potentially passes
-through any number of untrusted networks. SSH provides a way to encrypt
-the data sent over these connections and to improve the strength of the
-authentication mechanism used to log in. A similar usage of SSH is
-remote login to a router, perhaps to change its configuration or read
-its log files; clearly, a network administrator wants to be sure that he
-can log into a router securely and that unauthorized parties can neither
-log in nor intercept the commands sent to the router or output sent back
-to the administrator.
+often subscribe to ISPs that offer high-speed fiber-to-the-home,
+and they use these ISPs (plus some chain of other ISPs) to reach
+machines operated by their employer. This means that when a
+telecommuter logs into a machine inside his employer's data center,
+both the passwords and all the data sent or received potentially
+passes through any number of untrusted networks. SSH provides a way to
+encrypt the data sent over these connections and to improve the
+strength of the authentication mechanism used to log in. (A similar
+situation occurs when said employee connects to work using the
+public Wi-Fi at Starbucks.) Another usage of SSH is remote login to a
+router, perhaps to change its configuration or read its log files;
+clearly, a network administrator wants to be sure that he can log into
+a router securely and that unauthorized parties can neither log in nor
+intercept the commands sent to the router or output sent back to the
+administrator.
 
 The latest version of SSH, version 2, consists of three protocols:
 

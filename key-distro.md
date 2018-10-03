@@ -77,18 +77,19 @@ append a cryptographic hash of it that has been encrypted using his
 private key.) Since you trust Bob to tell the truth, you would now know
 that Alice's key is $$x$$, even though you had never met her or exchanged
 a single message with her. Using digital signatures, Bob wouldn't even
-have to send you a he could simply create and publish a digitally signed
-statement that Alice's key is $$x$$. Such a digitally signed statement of
-a public key binding is called a *public key certificate*, or simply a
-certificate. Bob could send Alice a copy of the certificate, or post it
-on a website. If and when someone needs to verify Alice's public key,
-they could do so by getting a copy of the certificate, perhaps directly
-from Alice—as long as they trust Bob and know his public key. You can
-see how starting from a very small number of keys (in this case, just
-Bob's) you could build up a large set of trusted keys over time. Bob in
-this case is playing the role often referred to as a *certification
-authority* (CA), and much of today's Internet security depends on CAs.
-VeriSign is one well-known commercial CA. We return to this topic below.
+have to send you a message; he could simply create and publish a
+digitally signed statement that Alice's key is $$x$$. Such a digitally
+signed statement of a public key binding is called a *public key
+certificate*, or simply a certificate. Bob could send Alice a copy of
+the certificate, or post it on a website. If and when someone needs to
+verify Alice's public key, they could do so by getting a copy of the
+certificate, perhaps directly from Alice—as long as they trust Bob and
+know his public key. You can see how starting from a very small number
+of keys (in this case, just Bob's) you could build up a large set of
+trusted keys over time. Bob in this case is playing the role often
+referred to as a *certification authority* (CA), and much of today's
+Internet security depends on CAs. VeriSign is one well-known
+commercial CA. We return to this topic below.
 
 One of the major standards for certificates is known as X.509. This
 standard leaves a lot of details open, but specifies a basic structure.
@@ -207,8 +208,8 @@ Phil Zimmerman, the developer of PGP, "PGP is for people who prefer to
 pack their own parachutes."
 
 PGP has become quite popular in the networking community, and PGP
-key-signing parties are a regular feature of IETF meetings. At these
-gatherings, an individual can
+key-signing parties are a regular feature of various networking
+events, such as IETF meetings. At these gatherings, an individual can
 
 - Collect public keys from others whose identity he knows.
 
