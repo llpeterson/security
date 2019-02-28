@@ -66,18 +66,3 @@ several decades and continue to cause problems, as do their relatives,
 *viruses*, which are spread by the transmission of infected
 files. Infected machines can then be arranged into *botnets*, which
 can be used to inflict further harm, such as launching DoS attacks.
-
-Although the Internet was designed with the redundancy to survive
-problems such as the disruption of a link or router, it was not
-originally designed to provide the kind of security we have been
-discussing. Internet security mechanisms have essentially been patches.
-If a comprehensive redesign of the Internet were to take place,
-integrating security would likely be the foremost driving factor. That
-possibility makes this chapter all the more pertinent.
-
-There are many tools today for securing networked systems, ranging from
-various forms of cryptography to specialized devices such as firewalls.
-This chapter introduces these tools with a
-particular focus on the use of cryptographic methods to improve network
-security. Improving the security of networks continues to be a field of
-rapid change and considerable research effort.
