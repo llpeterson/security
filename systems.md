@@ -1,6 +1,6 @@
 # {{ page.title }}
 
-At this point, we have seen many of the components that are required to
+We have now seen many of the components required to
 provide one or two aspects of security. These components include
 cryptographic algorithms, key predistribution mechanisms, and
 authentication protocols. In this section, we examine some complete

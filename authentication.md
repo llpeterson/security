@@ -1,10 +1,9 @@
 # {{ page.title }}
 
-We described how to encrypt messages and build authenticators in the
-first section and how to predistribute the necessary keys in the second
-section. It might seem as if all we have to do to make a protocol secure
-is append an authenticator to every message and, if we want
-confidentiality, encrypt the message.
+So far we described how to encrypt messages, build authenticators,
+predistribute the necessary keys. It might seem as if all we have to
+do to make a protocol secure is append an authenticator to every
+message and, if we want confidentiality, encrypt the message.
 
 There are two main reasons why it's not that simple. First, there is the
 problem of a *replay attack*: an adversary retransmitting a copy of a
@@ -14,7 +13,9 @@ to the website as though you had ordered more of the same. Even though
 it wasn't the original incarnation of the message, its authenticator
 would still be valid; after all, the message was created by you, and it
 wasn't modified. Clearly, we need the solution that ensures
-*originality*.  In a variation of this attack called a
+*originality*.
+
+In a variation of this attack called a
 *suppress-replay attack*, an adversary might merely delay your message
 (by intercepting and later replaying it), so that it is received at a
 time when it is no longer appropriate. For example, an adversary could
@@ -25,7 +26,7 @@ sense be the original, it wouldn't be timely. So we also need to ensure
 integrity. Ensuring them will in most cases require a nontrivial,
 back-and-forth protocol.
 
-The other problem we have not yet solved is how to establish a session
+The second problem we have not yet solved is how to establish a session
 key. A session key is a symmetric-key cipher key generated on the fly
 and used for just one session. This too involves a nontrivial protocol.
 
