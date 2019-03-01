@@ -57,6 +57,6 @@ in the face of routers and networks failing (or being destroyed), which explains
 why the routing algorithms are decentralized, with no central point of failure.
 On the other hand, the original design assumed all actors *inside* the network
 were trusted, and so little or no attention was paid what today we would call
-cybersecurity (attacks from bad actors that were able to connect to the network).
+cybersecurity (attacks from bad actors that are able to connect to the network).
 What this means is that many of the tools described in this chapter are patches.
 If a comprehensive redesign of the Internet were to take place, integrating security would likely be the foremost driving factor.
