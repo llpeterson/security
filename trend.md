@@ -84,5 +84,9 @@ information by verifying that it is signed by the name’s public key
 (Step 2).
 
 > [!NOTE|label:Broader Perspective]
-> To continue learning about the cloudification of the Internet, see
-> [The Cloud is the New Internet](../applications/trend.md)
+> To continue reading about the cloudification of the Internet, see 
+> [The Cloud is the New Internet](../applications/trend.md). 
+>
+> To learn more about Blockstack and decentralizing the Internet, we 
+> recommend:
+> * [Blockstack: A New Internet for Decentralized Applications](https://blockstack.org/whitepaper.pdf), October 2017. 
