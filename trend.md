@@ -66,6 +66,13 @@ the preimage.  Once a name is registered, only the owner of the name’s
 private key can transfer or revoke the name, or update its routing
 state.
 
+<figure class="line">
+	<a id="blockstack"></a>
+	<img src="figures/blockchain/Slide1.png" width="400px"/>
+	<figcaption>Decentralized identity management built on a 
+	blockchain foundation.</figcaption>
+</figure>
+
 Each name in Blockstack has an associated piece of routing state that
 contains one or more URLs that point to where the user’s identity
 information can be found online.  This data is too big and expensive
@@ -75,13 +82,13 @@ the identity database log, and Blockstack peers implement a gossip
 network for disseminating and authenticating the routing state.  Each
 peer maintains a full copy of the routing state.
 
-Putting it all together, resolving a name to its identity state works
-as follows. Given a name, a client first queries a Blockstack peer for
-the corresponding public key and routing state (Step 1). Once it has
-the routing state, the client obtains the identity data by resolving
-the URL(s) contained within it and authenticates the identity
-information by verifying that it is signed by the name’s public key
-(Step 2).
+Putting it all together, [Figure 1](#blockstack) shows how resolving a
+name to its corresponding identity state works. Given a name, a client
+first queries a Blockstack peer for the corresponding public key and
+routing state (Step 1). Once it has the routing state, the client
+obtains the identity data by resolving the URL(s) contained within it
+and authenticates the identity information by verifying that it is signed
+by the name’s public key (Step 2).
 
 > [!NOTE|label:Broader Perspective]
 > To continue reading about the cloudification of the Internet, see 
