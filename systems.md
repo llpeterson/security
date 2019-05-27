@@ -62,7 +62,7 @@ additionally specify which cryptographic algorithms are supported or
 preferred by the key's owner. The certificates provide bindings between
 email addresses and public keys.
 
-<figure class="line">
+<figure>
 	<a id="pgpMessage"></a>
 	<img src="figures/f08-13-9780123850591.png" width="400px"/>
 	<figcaption>PGP's steps to prepare a message for emailing from 
@@ -216,7 +216,7 @@ this machine (i.e., they are used on the server side), and file
 contains the private keys needed to authenticate the user on remote
 machines (i.e., they are used on the client side).
 
-<figure class="line">
+<figure>
 	<a id="ssh-tunnel"></a>
 	<img src="figures/f08-14-9780123850591.png" width="500px"/>
 	<figcaption>Using SSH port forwarding to secure other TCP-based
@@ -275,7 +275,7 @@ transport layer on top of TCP, all of the normal features of TCP
 to the application. This arrangement of protocol layers is depicted in
 [Figure 3](#tls-stack).
 
-<figure class="line">
+<figure>
 	<a id="tls-stack"></a>
 	<img src="figures/f08-15-9780123850591.png" width="300px"/>
 	<figcaption>Secure transport layer inserted between application
@@ -348,7 +348,7 @@ algorithms it selected from those listed by the client. These messages
 also contain a *client nonce* and a *server nonce*, respectively, that
 will be incorporated in generating the master secret later.
 
-<figure class="line">
+<figure>
 	<a id="tls-hand"></a>
 	<img src="figures/f08-16-9780123850591.png" width="300px"/>
 	<figcaption>Handshake protocol to establish TLS session.</figcaption>
@@ -500,7 +500,7 @@ of a certain number of bytes or to ensure that the resulting ciphertext
 terminates on a 4-byte boundary. Finally, the `AuthenticationData`
 carries the authenticator.
 
-<figure class="line">
+<figure>
 	<a id="esp"></a>
 	<img src="figures/f08-17-9780123850591.png" width="500px"/>
 	<figcaption>IPSec's ESP format.</figcaption>
@@ -527,7 +527,7 @@ become the payload of an ESP message sent to the other site's router.
 The receiving router would unwrap the payload IP packet and forward it
 on to its true destination.
 
-<figure class="line">
+<figure>
 	<a id="espTunnelPacket"></a>
 	<img src="figures/f08-18-9780123850591.png" width="600px"/>
 	<figcaption>An IP packet with a nested IP packet encapsulated
@@ -601,7 +601,7 @@ Specific EAP-compliant protocols, of which there are many, are called
 *EAP methods*. For example, EAP-TLS is an EAP method based on TLS
 authentication.
 
-<figure class="line">
+<figure>
 	<a id="AuthenServer"></a>
 	<img src="figures/f08-19-9780123850591.png" width="500px"/>
 	<figcaption>Use of an Authentication Server in 802.11i.</figcaption>
@@ -675,7 +675,7 @@ example, it might filter out all incoming messages except those
 addresses to a particular set of IP addresses or to particular TCP port
 numbers.
 
-<figure class="line">
+<figure>
 	<a id="firewall"></a>
 	<img src="figures/f08-20-9780123850591.png" width="600px"/>
 	<figcaption>A firewall filters packets flowing between a site and

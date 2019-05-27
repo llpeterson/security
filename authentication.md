@@ -89,7 +89,7 @@ for which responses are currently outstanding and haven't been
 outstanding too long; any purported response with an unrecognized nonce
 must be bogus.
 
-<figure class="line">
+<figure>
 	<a id="challenge-response"></a>
 	<img src="figures/f08-07-9780123850591.png" width="450px"/>
 	<figcaption>A challenge-response protocol.</figcaption>
@@ -110,7 +110,7 @@ mean this to include the case where Alice includes her certificate in
 her first message to Bob, and the case where Bob searches for a
 certificate about Alice when he receives her first message.
 
-<figure class="line">
+<figure>
 	<a id="KAuthSync"></a>
 	<img src="figures/f08-08-9780123850591.png" width="600px"/>
 	<figcaption>A public-key authentication protocol that depends on
@@ -142,7 +142,7 @@ message because the timestamp came from his clock, so he knows he can
 trust the new session key. The timestamps essentially serve as
 convenient nonces, and indeed this protocol could use nonces instead.
 
-<figure class="line">
+<figure>
 	<a id="pKAuthNoSync"></a>
 	<img src="figures/f08-09-9780123850591.png" width="500px"/>
 	<figcaption>A public-key authentication protocol that does not
@@ -161,7 +161,7 @@ The end product of the authentication protocol is a session key shared
 between Alice and Bob that they will use to communicate directly,
 without involving the KDC.
 
-<figure class="line">
+<figure>
 	<a id="needhamSchroeder"></a>
 	<img src="figures/f08-10-9780123850591.png" width="500px"/>
 	<figcaption>The Needham-Schroeder authentication protocol.</figcaption>
@@ -224,7 +224,7 @@ scheme is that if Alice needs to communicate with several servers, not
 just Bob, then she can get tickets for each of them from the TGS without
 going back to the AS.
 
-<figure class="line">
+<figure>
 	<a id="kerberos"></a>
 	<img src="figures/f08-11-9780123850591.png" width="600px"/>
 	<figcaption>Kerberos authentication.</figcaption>
@@ -335,7 +335,7 @@ public values, as in [Figure 6](#manInTheMiddle). The result is that
 Alice and Bob each end up unknowingly sharing a key with Mallory instead
 of each other.
 
-<figure class="line">
+<figure>
 	<a id="manInTheMIddle"></a>
 	<img src="figures/f08-12-9780123850591.png" width="300px"/>
 	<figcaption>A man-in-the-middle attackn.</figcaption>

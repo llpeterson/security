@@ -26,7 +26,7 @@ assuming the eavesdropper doesn't know the decryption function. The
 transformation represented by an encryption function and its
 corresponding decryption function is called a *cipher*.
 
-<figure class="line">
+<figure>
 	<a id="genericCrypto"></a>
 	<img src="figures/f08-01-9780123850591.png" width="500px"/>
 	<figcaption>Symmetric-key encryption and decryption.</figcaption>
@@ -119,7 +119,7 @@ mode of operation is *counter mode*, in which successive values of a
 counter (e.g., 1, 2, 3, $$\ldots$$) are incorporated into the encryption
 of successive blocks of plaintext.
 
-<figure class="line">
+<figure>
 	<a id="cbc"></a>
 	<img src="figures/f08-02-9780123850591.png" width="500px"/>
 	<figcaption>Cipher Block Chaining.</figcaption>
@@ -216,7 +216,7 @@ public key and send an encrypted message to the owner of the keys, and
 only the owner has the private key necessary to decrypt it. This
 scenario is depicted in [Figure 3](#public).
 
-<figure class="line">
+<figure>
 	<a id="public"></a>
 	<img src="figures/f08-03-9780123850591.png" width="500px"/>
 	<figcaption>Public-key encryption.</figcaption>
@@ -257,7 +257,7 @@ used primarily for authentication and to confidentially distribute
 symmetric keys, leaving the rest of confidentiality to symmetric-key
 ciphers.
 
-<figure class="line">
+<figure>
 	<a id="pksign"></a>
 	<img src="figures/f08-04-9780123850591.png" width="500px"/>
 	<figcaption>Authentication using public keys.</figcaption>
@@ -422,7 +422,7 @@ to her plaintext message. The receiver recomputes the MAC using the
 plaintext and the secret value and compares that recomputed MAC to the
 received MAC.
 
-<figure class="line">
+<figure>
 	<a id="macAndHmac"></a>
 	<img src="figures/f08-05-9780123850591.png" width="600px"/>
 	<figcaption>Computing a MAC (a) versus computing an HMAC (b).</figcaption>

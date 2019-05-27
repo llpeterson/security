@@ -66,7 +66,7 @@ the preimage.  Once a name is registered, only the owner of the name’s
 private key can transfer or revoke the name, or update its routing
 state.
 
-<figure class="line">
+<figure>
 	<a id="blockstack"></a>
 	<img src="figures/blockchain/Slide1.png" width="400px"/>
 	<figcaption>Decentralized identity management built on a 

@@ -148,7 +148,7 @@ everyone has the public key of the root CA, then any participant can
 provide a chain of certificates to another participant and know that it
 will be sufficient to build a chain of trust for that participant.
 
-<figure class="line">
+<figure>
 	<a id="pem-tree"></a>
 	<img src="figures/f08-06-9780123850591.png" width="600px"/>
 	<figcaption>Tree-structured certification authority hierarchy.</figcaption>
