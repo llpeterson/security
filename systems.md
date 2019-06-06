@@ -114,15 +114,14 @@ delayed or replayed email).
 ## Secure Shell (SSH)
 
 The Secure Shell (SSH) protocol is used to provide a remote login
-service and is intended to replace the less secure Telnet and rlogin
-programs used in the early days of the Internet. (SSH can also be used
-to remotely execute commands and transfer files, like the Unix `rsh`
-and `rcp` commands, respectively, but we will focus first on how SSH
-supports remote login.) SSH is most often used to provide strong
-client/server authentication/message integrity—where the SSH client
-runs on the user's desktop machine and the SSH server runs on some
-remote machine that the user wants to log into—but it also supports
-confidentiality. Telnet and rlogin provide none of these capabilities.
+service, replacing the less secure Telnet used in the early days of
+the Internet. (SSH can also be used to remotely execute commands and
+transfer files, but we will focus first on how SSH supports remote
+login.) SSH is most often used to provide strong client/server
+authentication/message integrity—where the SSH client runs on the
+user's desktop machine and the SSH server runs on some remote machine
+that the user wants to log into—but it also supports
+confidentiality. Telnet provides none of these capabilities. 
 Note that "SSH" is often used to refer to both the SSH protocol and
 applications that use it; you need to figure out which from the context.
 
