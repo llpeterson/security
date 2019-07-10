@@ -12,7 +12,7 @@ placed on a website, for example, then the replayed message would appear
 to the website as though you had ordered more of the same. Even though
 it wasn't the original incarnation of the message, its authenticator
 would still be valid; after all, the message was created by you, and it
-wasn't modified. Clearly, we need the solution that ensures
+wasn't modified. Clearly, we need a solution that ensures
 *originality*.
 
 In a variation of this attack called a
@@ -338,7 +338,7 @@ of each other.
 <figure>
 	<a id="manInTheMIddle"></a>
 	<img src="figures/f08-12-9780123850591.png" width="300px"/>
-	<figcaption>A man-in-the-middle attackn.</figcaption>
+	<figcaption>A man-in-the-middle attack.</figcaption>
 </figure>
 
 A variant of Diffie-Hellman sometimes called *fixed Diffie-Hellman*

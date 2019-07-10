@@ -12,7 +12,7 @@ assumption you make about how external actors and internal components
 you build upon will behave. For example, if you are transmitting
 a message over WiFi on an open campus, you would likely identify an
 eavesdropper that can intercept the message as a threat (and adopt some of
-the methods discussed in this chapter as a counter-measure), but if you are
+the methods discussed in this chapter as a countermeasure), but if you are
 transmitting a message over a fiber link between two machines in a locked
 datacenter, you might trust that channel is secure, and so take no
 additional steps.
@@ -35,7 +35,7 @@ you've implicitly trusted that the server you're running on is both faithfully
 executing that algorithm and not leaking a copy of your unencrypted
 message to an adversary. Do you treat this as a threat or do you trust that
 the server does not misbehave? At the end of the day, the best you can
-do is mitigate risk: identify those threats that you can elimiate in a cost
+do is mitigate risk: identify those threats that you can eliminate in a cost
 effective way, and be explicit about what trust assumptions you are making
 so you aren't caught off-guard by changing circumstances, such as an
 ever more determined or sophisticated adversary.

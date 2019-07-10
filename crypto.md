@@ -179,7 +179,7 @@ encrypt again.
 
 Although 3DES solves DES's key-length problem, it inherits some other
 shortcomings. Software implementations of DES/3DES are slow because it
-was originally designed, by IBM, for implementation in hardware. Also,
+was originally designed by IBM for implementation in hardware. Also,
 DES/3DES uses a 64-bit block size; a larger block size is more efficient
 and more secure.
 
@@ -414,8 +414,8 @@ ElGamal, and a third called the *Elliptic Curve Digital Signature
 Algorithm*.
 
 Another kind of authenticator is similar, but instead of encrypting a
-hash it uses a hash-like function that takes a secret value (known to
-only the sender and the receiver) as a parameter, as illustrated in
+hash it uses a hash-like function that takes a secret value (known
+only to the sender and the receiver) as a parameter, as illustrated in
 [Figure 5](#macAndHmac). Such a function outputs an authenticator
 called a *message authentication code* (MAC). The sender appends the MAC
 to her plaintext message. The receiver recomputes the MAC using the

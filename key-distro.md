@@ -259,7 +259,7 @@ original expiration date is passed, it can be removed from the CRL.
 ## Predistribution of Symmetric Keys
 
 If Alice wants to use a secret-key cipher to communicate with Bob, she
-can't just pick a key and send it to to him because, without already
+can't just pick a key and send it to him because, without already
 having a key, they can't encrypt this key to keep it confidential and
 they can't authenticate each other. As with public keys, some
 predistribution scheme is needed. Predistribution is harder for
