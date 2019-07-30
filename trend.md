@@ -90,7 +90,11 @@ obtains the identity data by resolving the URL(s) contained within it
 and authenticates the identity information by verifying that it is signed
 by the name’s public key (Step 2).
 
+{% if output.name == "ebook" %}
+> **Broader Perspective**
+{% else %}
 > [!NOTE|label:Broader Perspective]
+{% endif %}
 > To continue reading about the cloudification of the Internet, see 
 > [The Cloud is the New Internet](../applications/trend.md). 
 >
