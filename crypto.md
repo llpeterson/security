@@ -29,7 +29,7 @@ corresponding decryption function is called a *cipher*.
 <figure>
 	<a id="genericCrypto"></a>
 	<img src="figures/f08-01-9780123850591.png" width="500px"/>
-	<figcaption>Symmetric-key encryption and decryption.</figcaption>
+	<figcaption>Secret-key encryption and decryption.</figcaption>
 </figure>
 
 Cryptographers have been led to the principle, first stated in 1883,
@@ -125,16 +125,18 @@ of successive blocks of plaintext.
 	<figcaption>Cipher Block Chaining.</figcaption>
 </figure>
 
-## Symmetric-Key Ciphers
+## Secret-Key Ciphers
 
-In a symmetric-key cipher, both participants in a communication
+In a secret-key cipher, both participants in a communication
 share the same key. In other words, if a message is encrypted using a
 particular key, the same key is required for decrypting the message. If
 the cipher illustrated in [Figure 1](#genericCrypto) were a
-symmetric-key cipher, then the encryption and decryption keys would be
-identical. Symmetric-key ciphers are also known as secret-key ciphers
-since the shared key must be known only to the participants. (We'll take
-a look at the alternative, public-key ciphers, shortly.)
+secret-key cipher, then the encryption and decryption keys would be
+identical. Secret-key ciphers are also known as symmetric-key ciphers
+since the secret is shared with both participants. We'll take
+a look at the alternative, public-key ciphers, shortly. (Public-key
+cipers are known as also asymmetric-key ciphers, since as we'll soon
+se, the two participants use different keys.)
 
 > We use the term *participant* for the parties involved in a secure 
 > communication since that is the term we have been using throughout 
@@ -142,7 +144,7 @@ a look at the alternative, public-key ciphers, shortly.)
 > world, they are typically called *principals*. 
 
 The U.S. National Institute of Standards and Technology (NIST) has
-issued standards for a series of symmetric-key ciphers. *Data Encryption
+issued standards for a series of secret-key ciphers. *Data Encryption
 Standard* (DES) was the first, and it has stood the test of time in that
 no cryptanalytic attack better than brute force search has been
 discovered. Brute force search, however, has gotten faster. DES's keys
@@ -202,9 +204,9 @@ from any significant successful attacks.
 
 ## Public-Key Ciphers
 
-An alternative to symmetric-key ciphers is asymmetric, or public-key,
-ciphers. Instead of a single key shared by two participants, a
-public-key cipher uses a pair of related keys, one for encryption and a
+An alternative to secret-key ciphers is public-key, ciphers. Instead
+of a single key shared by two participants, a public-key cipher uses a
+pair of related keys, one for encryption and a
 different one for decryption. The pair of keys is "owned" by just one
 participant. The owner keeps the decryption key secret so that only the
 owner can decrypt messages; that key is called the *private key*. The
@@ -227,8 +229,8 @@ encryption key is useless for decrypting a message—you couldn't even
 decrypt a message that you yourself had just encrypted unless you had
 the private decryption key. If we think of keys as defining a
 communication channel between participants, then another difference
-between public-key and symmetric-key ciphers is the topology of the
-channels. A key for a symmetric-key cipher provides a channel that is
+between public-key and secret-key ciphers is the topology of the
+channels. A key for a secret-key cipher provides a channel that is
 two-way between two participants—each participant holds the same
 (symmetric) key that either one can use to encrypt or decrypt messages
 in either direction. A public/private key pair, in contrast, provides a
@@ -254,7 +256,7 @@ concluded that the private key must have been used to perform the
 encryption. Exactly how this operation is used to provide authentication
 is the topic of a later section. As we will see, public-key ciphers are
 used primarily for authentication and to confidentially distribute
-symmetric keys, leaving the rest of confidentiality to symmetric-key
+secret (symmetric) keys, leaving the rest of confidentiality to secret-key
 ciphers.
 
 <figure>
@@ -277,7 +279,7 @@ factor numbers is one that mathematicians have worked on unsuccessfully
 since long before RSA appeared in 1978, and RSA's subsequent resistance
 to cryptanalysis has further bolstered confidence in its security.
 Unfortunately, RSA needs relatively large keys, at least 1024 bits, to
-be secure. This is larger than keys for symmetric-key ciphers because it
+be secure. This is larger than keys for secret-key ciphers because it
 is faster to break an RSA private key by factoring the large number on
 which the pair of keys is based than by exhaustively searching the key
 space.
@@ -291,7 +293,7 @@ difficult to compute; cryptographic schemes based on this problem are
 referred to as *elliptic curve cryptography*.
 
 Public-key ciphers are, unfortunately, several orders of magnitude
-slower than symmetric-key ciphers. Consequently, symmetric-key ciphers
+slower than secret-key ciphers. Consequently, secret-key ciphers
 are used for the vast majority of encryption, while public-key ciphers
 are reserved for use in authentication and session key establishment.
 
@@ -377,22 +379,12 @@ produce the same digest—then you would need to compute the digests of
 only 2$$^{64}$$ messages, on average. This surprising fact is the basis of
 the "birthday attack"—see the exercises for more details.
 
-There are several common cryptographic hash algorithms, including
-Message Digest 5 (MD5) and Secure Hash Algorithm 1 (SHA-1). MD5 outputs
-a 128-bit digest, and SHA-1 outputs a 160-bit digest. Weaknesses of MD5
-have been known for some time, which led to recommendations to shift
-from MD5 to SHA-1. More recently, researchers have discovered techniques
-that find SHA-1 collisions somewhat more efficiently than brute force,
-but they are not yet computationally feasible. Although *collision
-attacks* (attacks based on finding any collision) are not as great a
-risk as *preimage attacks* (attacks based on finding a second message
-that collides with a given first message), these are nonetheless serious
-weaknesses. NIST recommended phasing out SHA-1 by 2010, in favor of four
-variants of SHA that are collectively known as SHA-2. There is an
-ongoing competition to devise a new hash known as SHA-3.
-
-When generating an encrypted message digest, the digest encryption could
-use either a symmetric-key cipher or a public-key cipher. If a
+There have been several common cryptographic hash algorithms over the
+years, including Message Digest 5 (MD5) and the Secure Hash Algorithm
+(SHA) family. Weaknesses of MD5 and earlier versions of SHA have been
+known for some time, which led NIST to recommend using SHA-3 in 2015.
+generating an encrypted message digest, the digest encryption could
+use either a secret-key cipher or a public-key cipher. If a
 public-key cipher is used, the digest would be encrypted using the
 sender's private key (the one we normally think of as being used for
 decryption), and the receiver—or anyone else—could decrypt the
@@ -403,7 +395,7 @@ is called a *digital signature* because it provides nonrepudiation like
 a written signature. The receiver of a message with a digital signature
 can prove to any third party that the sender really sent that message,
 because the third party can use the sender's public key to check for
-herself. (Symmetric-key encryption of a digest does not have this
+herself. (secret-key encryption of a digest does not have this
 property because only the two participants know the key; furthermore,
 since both participants know the key, the alleged receiver could have
 created the message herself.) Any public-key cipher can be used for
@@ -444,7 +436,7 @@ confidential, so the original message could be transmitted as plaintext.
 To add confidentiality to a message with an authenticator, it suffices
 to encrypt the concatenation of the entire message including its
 authenticator—the MAC, HMAC, or encrypted digest. Remember that, in
-practice, confidentiality is implemented using symmetric-key ciphers
+practice, confidentiality is implemented using secret-key ciphers
 because they are so much faster than public-key ciphers. Furthermore, it
 costs little to include the authenticator in the encryption, and it
 increases security. A common simplification is to encrypt the message

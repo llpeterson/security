@@ -1,7 +1,7 @@
 # {{ page.title }}
 
 To use ciphers and authenticators, the communicating participants need
-to know what keys to use. In the case of a symmetric-key cipher, how
+to know what keys to use. In the case of a secret-key cipher, how
 does a pair of participants obtain the key they share? In the case of a
 public-key cipher, how do participants know what public key belongs to a
 certain participant? The answer differs depending on whether the keys
@@ -9,7 +9,7 @@ are short-lived *session keys* or longer-lived *predistributed keys*.
 
 A session key is a key used to secure a single, relatively short episode
 of communication: a session. Each distinct session between a pair of
-participants uses a new session key, which is always a symmetric key for
+participants uses a new session key, which is always a secret key for
 speed. The participants determine what session key to use by means of a
 protocol—a session key establishment protocol. A session key
 establishment protocol needs its own security (so that, for example, an
@@ -24,7 +24,7 @@ keys and predistributed keys:
    cryptanalysis, and less information exposed should the key be
    broken.
 
-- Predistribution of symmetric keys is problematic.
+- Predistribution of secret keys is problematic.
 
 - Public key ciphers are generally superior for authentication and
    session key establishment but too slow to use for encrypting entire
@@ -256,17 +256,17 @@ certificate when it is issued. Thus, we can limit the length of time
 that a revoked certificate needs to stay on a CRL. As soon as its
 original expiration date is passed, it can be removed from the CRL.
 
-## Predistribution of Symmetric Keys
+## Predistribution of Secret Keys
 
 If Alice wants to use a secret-key cipher to communicate with Bob, she
 can't just pick a key and send it to him because, without already
 having a key, they can't encrypt this key to keep it confidential and
 they can't authenticate each other. As with public keys, some
 predistribution scheme is needed. Predistribution is harder for
-symmetric keys than for public keys for two obvious reasons:
+secret keys than for public keys for two obvious reasons:
 
 - While only one public key per entity is sufficient for
-   authentication and confidentiality, there must be a symmetric key
+   authentication and confidentiality, there must be a secret key
    for each pair of entities who wish to communicate. If there are N
    entities, that means N(N-1)/2 keys.
 
@@ -285,3 +285,126 @@ Bob—using the keys that the KDC already shares with each of them—and
 generates a new session key for them to use. Then Alice and Bob
 communicate directly using their session key. Kerberos is a widely used
 system based on this approach.
+
+## Diffie-Hellman Key Exchange 
+
+Another approach to establishing a shared secret key is to use the
+Diffie-Hellman key exchange protocol, which works without using any
+predistributed keys. The messages exchanged between
+Alice and Bob can be read by anyone able to eavesdrop, and yet the 
+eavesdropper won't know the secret key that Alice and Bob end up with. 
+
+Diffie-Hellman doesn't authenticate the participants. Since it is
+rarely useful to communicate securely without
+being sure whom you're communicating with, Diffie-Hellman is usually 
+augmented in some way to provide authentication. One of the main uses of 
+Diffie-Hellman is in the Internet Key Exchange (IKE) protocol, a 
+central part of the IP Security (IPsec) architecture. 
+
+The Diffie-Hellman protocol has two parameters, $$p$$ and $$g$$, both of 
+which are public and may be used by all the users in a particular 
+system. Parameter $$p$$ must be a prime number. The integers 
+$$\bmod p$$ (short for modulo $$p$$) are $$0$$ through $$p-1$$, since 
+$$x \bmod p$$ is 
+the remainder after $$x$$ is divided by $$p$$, and form what mathematicians 
+call a *group* under multiplication. Parameter $$g$$ (usually called a 
+generator) must be a *primitive root* of $$p$$: For every number $$n$$ from 
+1 through $$p-1$$ there must be some value $$k$$ such that 
+$$n = g^k \bmod p$$. For example, if $$p$$ were the prime number 5 (a real 
+system would use a much larger number), then we might choose 2 to be 
+the generator $$g$$ since:
+
+$$ 
+1 = 2^0 \bmod p 
+$$ 
+
+$$ 
+2 = 2^1 \bmod p 
+$$ 
+
+$$ 
+3 = 2^3 \bmod p 
+$$ 
+
+$$ 
+4 = 2^2 \bmod p 
+$$ 
+
+Suppose Alice and Bob want to agree on a shared secret key. Alice and 
+Bob, and everyone else, already know the values of $$p$$ and $$g$$. Alice 
+generates a random private value $$a$$ and Bob generates a random private 
+value $$b$$. Both $$a$$ and $$b$$ are drawn from the set of integers 
+$$\{1,$$ ..., $$p-1\}$$. Alice and Bob derive their corresponding public 
+values—the values they will send to each other unencrypted—as 
+follows. Alice's public value is 
+
+$$ 
+g^a \bmod p 
+$$ 
+
+and Bob's public value is 
+
+$$ 
+g^b \bmod p 
+$$ 
+
+They then exchange their public 
+values. Finally, Alice computes 
+
+$$ 
+g^{ab} \bmod p = (g^b \bmod p)^a \bmod p 
+$$ 
+
+and Bob 
+computes 
+
+$$ 
+g^{ba} \bmod p = (g^a \bmod p)^b \bmod p. 
+$$ 
+
+Alice 
+and Bob now have $$g^{ab} \bmod p$$ (which is equal to 
+$$g^{ba} \bmod p$$) as their shared secret key. 
+
+Any eavesdropper would know $$p, g$$, and the two public values 
+$$g^a \bmod p$$ and $$g^b \bmod p$$. If only the eavesdropper could 
+determine $$a$$ 
+or $$b$$, she could easily compute the resulting key. Determining $$a$$ or 
+$$b$$ from that information is, however, computationally infeasible for 
+suitably large $$p,a$$, and $$b$$; it is known as the *discrete logarithm 
+problem*. 
+
+On the other hand, there is the problem of Diffie-Hellman's lack of 
+authentication. One attack that can take advantage of this is the 
+*man-in-the-middle attack*. Suppose Mallory is an adversary with the 
+ability to intercept messages. Mallory already knows $$p$$ and $$g$$ since 
+they are public, and she generates random private values $$c$$ and $$d$$ to 
+use with Alice and Bob, respectively. When Alice and Bob send their 
+public values to each other, Mallory intercepts them and sends her own 
+public values, as in [Figure 6](#manInTheMiddle). The result is that 
+Alice and Bob each end up unknowingly sharing a key with Mallory instead 
+of each other. 
+
+<figure>
+	<a id="manInTheMIddle"></a>
+	<img src="figures/f08-12-9780123850591.png" width="300px"/>
+	<figcaption>A man-in-the-middle attack.</figcaption>
+</figure>
+
+A variant of Diffie-Hellman sometimes called *fixed Diffie-Hellman*
+supports authentication of one or both participants. It relies on 
+certificates that are similar to public key certificates but instead 
+certify the Diffie-Hellman public parameters of an entity. For example,
+such a certificate would state that Alice's Diffie-Hellman parameters 
+are $$p,g$$, and $$g^a \bmod p$$ (note that the value of $$a$$ would still be 
+known only to Alice). Such a certificate would assure Bob that the other 
+participant in Diffie-Hellman is Alice—or else the other participant 
+won't be able to compute the secret key, because she won't know $$a$$. If 
+both participants have certificates for their Diffie-Hellman 
+parameters, they can authenticate each other. If just one has a 
+certificate, then just that one can be authenticated. This is useful in 
+some situations; for example, when one participant is a web server and 
+the other is an arbitrary client, the client can authenticate the web 
+server and establish a secret key for confidentiality before sending a 
+credit card number to the web server. 
+

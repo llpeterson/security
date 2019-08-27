@@ -76,7 +76,7 @@ to Bob. Alice's PGP application goes through the steps illustrated in
 Alice; MD5, SHA-1, and the SHA-2 family are among the hashes that may be
 used in the digital signature. Her PGP application then generates a new
 session key for just this one message; AES and 3DES are among the
-supported symmetric-key ciphers. The digitally signed message is
+supported secret-key ciphers. The digitally signed message is
 encrypted using the session key, then the session key itself is
 encrypted using Bob's public key and appended to the message. Alice's
 PGP application reminds her of the level of trust she had previously
@@ -304,12 +304,12 @@ use. The participants negotiate a choice of:
 
 - Data integrity hash (MD5, SHA-1, etc.), used to implement HMACs
 
-- Symmetric-key cipher for confidentiality (among the possibilities
+- secret-key cipher for confidentiality (among the possibilities
    are DES, 3DES, and AES)
 
 - Session key establishment approach (among the possibilities are
-   Diffie-Hellman, fixed Diffie-Hellman, and public-key
-   authentication protocols using RSA or DSS)
+   Diffie-Hellman, and public-key authentication protocols using
+   DSS)
 
 Interestingly, the participants may also negotiate the use of a
 compression algorithm, not because this offers any security benefits,
@@ -386,7 +386,7 @@ service. Messages handed down from the application layer are:
 
 3. Integrity-protected using an HMAC
 
-4. Encrypted using a symmetric-key cipher
+4. Encrypted using a secret-key cipher
 
 5. Passed to the transport layer (normally TCP) for transmission
 
@@ -481,7 +481,7 @@ framework only—the exact form of the keys and authentication data
 depends on the key generation technique, the cipher, and the
 authentication mechanism that is used. Moreover, ISAKMP does not specify
 a particular key exchange protocol, although it does suggest the
-Internet Key Exchange (IKE) as one possibility, and IKE is what is used
+Internet Key Exchange (IKE) as one possibility, and IKE v2 is what is used
 in practice.
 
 ESP is the protocol used to securely transport data over an established
@@ -566,8 +566,8 @@ for 802.11, known as Wired Equivalent Privacy (WEP), turned out to be
 seriously flawed and quite easily breakable.
 
 The IEEE 802.11i standard provides authentication, message integrity,
-and confidentiality to 802.11 (Wi-Fi) at the link layer. *WPA2* (Wi-Fi
-Protected Access 2) is often used as a synonym for 802.11i, although it
+and confidentiality to 802.11 (Wi-Fi) at the link layer. *WPA3* (Wi-Fi
+Protected Access 3) is often used as a synonym for 802.11i, although it
 is technically a trademark of the Wi-Fi Alliance that certifies product
 compliance with 802.11i.
 

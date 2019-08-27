@@ -18,7 +18,7 @@ datacenter, you might trust that channel is secure, and so take no
 additional steps.
 
 You could argue that since you already have a way to protect WiFi-based
-communication you just as well use it protect the fiber-based
+communication you just as well use it to protect the fiber-based
 channel, but that presumes the outcome of a cost/benefit analysis.
 Suppose protecting any message, whether sent over WiFi or fiber, slows the
 communication down by 10% due to the overhead of encryption. If you

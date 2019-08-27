@@ -27,7 +27,7 @@ integrity. Ensuring them will in most cases require a nontrivial,
 back-and-forth protocol.
 
 The second problem we have not yet solved is how to establish a session
-key. A session key is a symmetric-key cipher key generated on the fly
+key. A session key is a secret-key cipher key generated on the fly
 and used for just one session. This too involves a nontrivial protocol.
 
 What these two issues have in common is authentication. If a message is
@@ -37,7 +37,7 @@ And, obviously, when you are arranging to share a new session key with
 someone, you want to know you are sharing it with the right person.
 Usually, authentication protocols establish a session key at the same
 time, so that at the end of the protocol Alice and Bob have
-authenticated each other and they have a new symmetric key to use.
+authenticated each other and they have a new secret key to use.
 Without a new session key, the protocol would just authenticate Alice
 and Bob at one point in time; a session key allows them to efficiently
 authenticate subsequent messages. Generally, session key establishment
@@ -78,7 +78,7 @@ Another solution to the shortcomings of timestamps and nonces is to use
 one or both of them in a *challenge-response* protocol. Suppose we use
 a timestamp. In a challenge-response protocol, Alice sends Bob a
 timestamp, challenging Bob to encrypt it in a response message (if they
-share a symmetric key) or digitally sign it in a response message (if
+share a secret key) or digitally sign it in a response message (if
 Bob has a public key, as in [Figure 1](#challenge-response)). The
 encrypted timestamp is like an authenticator that additionally proves
 timeliness. Alice can easily check the timeliness of the timestamp in a
@@ -97,7 +97,7 @@ must be bogus.
 
 The beauty of challenge-response, which might otherwise seem
 excessively complex, is that it combines timeliness and authentication;
-after all, only Bob (and possibly Alice, if it's a symmetric-key cipher)
+after all, only Bob (and possibly Alice, if it's a secret-key cipher)
 knows the key necessary to encrypt the never before seen timestamp or
 nonce. Timestamps or nonces are used in most of the authentication
 protocols that follow.
@@ -150,12 +150,12 @@ convenient nonces, and indeed this protocol could use nonces instead.
 	her own clock, and likewise for Bob.</figcaption>
 </figure>
 
-## Symmetric-Key Authentication Protocols
+## Secret-Key Authentication Protocols
 
-Only in fairly small systems is it practical to predistribute symmetric
+Only in fairly small systems is it practical to predistribute secret
 keys to every pair of entities. We focus here on larger systems, where
 each entity would have its own *master key* shared only with a Key
-Distribution Center (KDC). In this case, symmetric-key-based
+Distribution Center (KDC). In this case, secret-key-based
 authentication protocols involve three parties: Alice, Bob, and a KDC.
 The end product of the authentication protocol is a session key shared
 between Alice and Bob that they will use to communicate directly,
@@ -179,7 +179,7 @@ protocol themselves.
 The nonce in the first two messages is to assure Alice that the KDC's
 reply is fresh. The second and third messages include the new session
 key and Alice's identifier, encrypted together using Bob's master key.
-It is a sort of symmetric-key version of a public-key certificate; it is
+It is a sort of secret-key version of a public-key certificate; it is
 in effect a signed statement by the KDC (because the KDC is the only
 entity besides Bob who knows Bob's master key) that the enclosed session
 key is owned by Alice and Bob. Although the nonce in the last two
@@ -211,7 +211,7 @@ Kerberos is when the user is prompted for a password.
 
 In Needham-Schroeder, the KDC's reply to Alice plays two roles: It
 gives her the means to prove her identity (only Alice can decrypt the
-reply), and it gives her a sort of symmetric-key certificate or "ticket"
+reply), and it gives her a sort of secret-key certificate or "ticket"
 to present to Bob—the session key and Alice's identifier, encrypted
 with Bob's master key. In Kerberos, those two functions—and the KDC
 itself, in effect—are split up ([Figure 5](#kerberos)). A trusted
@@ -234,126 +234,7 @@ In the client/server application domain for which Kerberos is intended,
 it is reasonable to assume a degree of clock synchronization. This
 allows Kerberos to use timestamps and lifespans instead of
 Needham-Shroeder's nonces, and thereby eliminate the Needham-Schroeder
-security weakness explored in Exercise 4. Kerberos supports a choice of
-cryptographic algorithms including the hashes SHA-1 and MD5 and the
-symmetric-key ciphers AES, 3DES, and DES.
+security weakness. Kerberos supports a choice of hash functions and
+secret-key ciphers, allowing it to keep pace with the
+state-of-the-art in cryptographic algorithms.
 
-## Diffie-Hellman Key Agreement
-
-The Diffie-Hellman key agreement protocol establishes a session key
-without using any predistributed keys. The messages exchanged between
-Alice and Bob can be read by anyone able to eavesdrop, and yet the
-eavesdropper won't know the session key that Alice and Bob end up with.
-On the other hand, Diffie-Hellman doesn't authenticate the
-participants. Since it is rarely useful to communicate securely without
-being sure whom you're communicating with, Diffie-Hellman is usually
-augmented in some way to provide authentication. One of the main uses of
-Diffie-Hellman is in the Internet Key Exchange (IKE) protocol, a
-central part of the IP Security (IPsec) architecture.
-
-The Diffie-Hellman protocol has two parameters, $$p$$ and $$g$$, both of
-which are public and may be used by all the users in a particular
-system. Parameter $$p$$ must be a prime number. The integers
-$$\bmod p$$ (short for modulo $$p$$) are $$0$$ through $$p-1$$, since
-$$x \bmod p$$ is
-the remainder after $$x$$ is divided by $$p$$, and form what mathematicians
-call a *group* under multiplication. Parameter $$g$$ (usually called a
-generator) must be a *primitive root* of $$p$$: For every number $$n$$ from
-1 through $$p-1$$ there must be some value $$k$$ such that
-$$n = g^k \bmod p$$. For example, if $$p$$ were the prime number 5 (a real
-system would use a much larger number), then we might choose 2 to be
-the generator $$g$$ since:
-
-$$
-1 = 2^0 \bmod p
-$$
-
-$$
-2 = 2^1 \bmod p
-$$
-
-$$
-3 = 2^3 \bmod p
-$$
-
-$$
-4 = 2^2 \bmod p
-$$
-
-Suppose Alice and Bob want to agree on a shared symmetric key. Alice and
-Bob, and everyone else, already know the values of $$p$$ and $$g$$. Alice
-generates a random private value $$a$$ and Bob generates a random private
-value $$b$$. Both $$a$$ and $$b$$ are drawn from the set of integers
-$$\{1,$$ ..., $$p-1\}$$. Alice and Bob derive their corresponding public
-values—the values they will send to each other unencrypted—as
-follows. Alice's public value is
-
-$$
-g^a \bmod p
-$$
-
-and Bob's public value is
-
-$$
-g^b \bmod p
-$$
-
-They then exchange their public
-values. Finally, Alice computes
-
-$$
-g^{ab} \bmod p = (g^b \bmod p)^a \bmod p
-$$
-
-and Bob
-computes
-
-$$
-g^{ba} \bmod p = (g^a \bmod p)^b \bmod p.
-$$
-
-Alice
-and Bob now have $$g^{ab} \bmod p$$ (which is equal to
-$$g^{ba} \bmod p$$) as their shared symmetric key.
-
-Any eavesdropper would know $$p, g$$, and the two public values
-$$g^a \bmod p$$ and $$g^b \bmod p$$. If only the eavesdropper could
-determine $$a$$
-or $$b$$, she could easily compute the resulting key. Determining $$a$$ or
-$$b$$ from that information is, however, computationally infeasible for
-suitably large $$p,a$$, and $$b$$; it is known as the *discrete logarithm
-problem*.
-
-On the other hand, there is the problem of Diffie-Hellman's lack of
-authentication. One attack that can take advantage of this is the
-*man-in-the-middle attack*. Suppose Mallory is an adversary with the
-ability to intercept messages. Mallory already knows $$p$$ and $$g$$ since
-they are public, and she generates random private values $$c$$ and $$d$$ to
-use with Alice and Bob, respectively. When Alice and Bob send their
-public values to each other, Mallory intercepts them and sends her own
-public values, as in [Figure 6](#manInTheMiddle). The result is that
-Alice and Bob each end up unknowingly sharing a key with Mallory instead
-of each other.
-
-<figure>
-	<a id="manInTheMIddle"></a>
-	<img src="figures/f08-12-9780123850591.png" width="300px"/>
-	<figcaption>A man-in-the-middle attack.</figcaption>
-</figure>
-
-A variant of Diffie-Hellman sometimes called *fixed Diffie-Hellman*
-supports authentication of one or both participants. It relies on
-certificates that are similar to public key certificates but instead
-certify the Diffie-Hellman public parameters of an entity. For example,
-such a certificate would state that Alice's Diffie-Hellman parameters
-are $$p,g$$, and $$g^a \bmod p$$ (note that the value of $$a$$ would still be
-known only to Alice). Such a certificate would assure Bob that the other
-participant in Diffie-Hellman is Alice—or else the other participant
-won't be able to compute the secret key, because she won't know $$a$$. If
-both participants have certificates for their Diffie-Hellman
-parameters, they can authenticate each other. If just one has a
-certificate, then just that one can be authenticated. This is useful in
-some situations; for example, when one participant is a web server and
-the other is an arbitrary client, the client can authenticate the web
-server and establish a session key for confidentiality before sending a
-credit card number to the web server.
