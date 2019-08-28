@@ -16,15 +16,13 @@ establishment protocol needs its own security (so that, for example, an
 adversary cannot learn the new session key); that security is based on
 the longer-lived predistributed keys.
 
-There are several motivations for this division of labor between session
-keys and predistributed keys:
+There are two primary motivations for this division of labor between
+session keys and predistributed keys:
 
 - Limiting the amount of time a key is used results in less time for
    computationally intensive attacks, less ciphertext for
    cryptanalysis, and less information exposed should the key be
    broken.
-
-- Predistribution of secret keys is problematic.
 
 - Public key ciphers are generally superior for authentication and
    session key establishment but too slow to use for encrypting entire
@@ -284,7 +282,9 @@ Rather, the KDC participates in a protocol that authenticates Alice and
 Bob—using the keys that the KDC already shares with each of them—and
 generates a new session key for them to use. Then Alice and Bob
 communicate directly using their session key. Kerberos is a widely used
-system based on this approach.
+system based on this approach. We describe Kerberos (which also
+provides authentication) in the next section. The following subsection
+describes a powerful alternative.
 
 ## Diffie-Hellman Key Exchange 
 
@@ -372,15 +372,45 @@ determine $$a$$
 or $$b$$, she could easily compute the resulting key. Determining $$a$$ or 
 $$b$$ from that information is, however, computationally infeasible for 
 suitably large $$p,a$$, and $$b$$; it is known as the *discrete logarithm 
-problem*. 
+problem*.
 
-On the other hand, there is the problem of Diffie-Hellman's lack of 
-authentication. One attack that can take advantage of this is the 
-*man-in-the-middle attack*. Suppose Mallory is an adversary with the 
-ability to intercept messages. Mallory already knows $$p$$ and $$g$$ since 
-they are public, and she generates random private values $$c$$ and $$d$$ to 
-use with Alice and Bob, respectively. When Alice and Bob send their 
-public values to each other, Mallory intercepts them and sends her own 
+For example, using $$p = 5$$ and $$g = 2$$ from above, suppose Alice
+picks the random number $$a = 3$$ and Bob picks the random number
+$$b = 4$$. Then Alice sends Bob the public value
+
+$$ 
+2^3 \bmod 5 = 3 
+$$ 
+
+and Bob sends Alice the public value
+
+$$ 
+2^4 \bmod 5 = 1 
+$$
+
+Alice is then able to compute
+
+$$ 
+g^{ab} \bmod p = (2^b \bmod 5)^3 \bmod 5 = (1)^3 \bmod 5 = 1
+$$
+
+by substituting Bob's public value for $$(2^b \bmod 5)$$. Similarly,
+Bob is able to compute
+
+$$ 
+g^{ba} \bmod p = (g^a \bmod 5)^4 \bmod 5 = (3)^4 \bmod 5 = 1. 
+$$
+
+by substituting Alice's public value for $$(2^a \bmod 5)$$. Both Alice
+and Bob now agree that the secret key is $$1$$.
+
+There is the problem of Diffie-Hellman's lack of authentication. One
+attack that can take advantage of this is the *man-in-the-middle
+attack*. Suppose Mallory is an adversary with the ability to intercept
+messages. Mallory already knows $$p$$ and $$g$$ since they are public,
+and she generates random private values $$c$$ and $$d$$ to use with
+Alice and Bob, respectively. When Alice and Bob send their public
+values to each other, Mallory intercepts them and sends her own
 public values, as in [Figure 6](#manInTheMiddle). The result is that 
 Alice and Bob each end up unknowingly sharing a key with Mallory instead 
 of each other. 
