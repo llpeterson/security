@@ -405,22 +405,22 @@ other hand, it is TCP's delivery guarantees that make it possible for
 TLS to rely on a legitimate TLS message having the next implicit
 sequence number in order.
 
-Another interesting feature of the TLS protocol, which is quite a useful
-feature for Web transactions, is the ability to resume a session. To
-understand the motivation for this, it is helpful to understand how HTTP
-makes use of TCP connections. (The details of HTTP are presented in the
-next chapter.) Each HTTP operation, such as getting a page of text or an
-image from a server, requires a new TCP connection to be opened.
-Retrieving a single page with a number of embedded graphical objects
-might take many TCP connections. Opening a TCP connection requires a
-three-way handshake before data transmission can start. Once the TCP
-connection is ready to accept data, the client would then need to start
-the TLS handshake protocol, taking at least another two round-trip times
-(and consuming some amount of processing resources and network
-bandwidth) before actual application data could be sent. The resumption
-capability of TLS alleviates this problem.
+Another interesting feature of the TLS protocol is the ability to
+resume a session. To understand the original motivation for this, it
+is helpful to understand how HTTP originally mades use of TCP
+connections. (The details of HTTP are presented in the next chapter.)
+Each HTTP operation, such as getting a page from a server, required a
+new TCP connection to be opened. Retrieving a single page with a
+number of embedded graphical objects might take many TCP
+connections. Opening a TCP connection requires a three-way handshake
+before data transmission can start. Once the TCP connection is ready
+to accept data, the client would then need to start the TLS handshake
+protocol, taking at least another two round-trip times (and consuming
+some amount of processing resources and network bandwidth) before
+actual application data could be sent. The resumption capability of
+TLS was designed to alleviate this problem.
 
-Session resumption is an optimization of the handshake that can be used
+The idea of session resumption is to optimize away the handshake
 in those cases where the client and the server have already established
 some shared state in the past. The client simply includes the session ID
 from a previously established session in its initial handshake message.
@@ -432,6 +432,35 @@ parameters previously negotiated. If the session ID does not match any
 session state cached at the server, or if resumption was not allowed for
 the session, then the server will fall back to the normal handshake
 process.
+
+The reason the preceeding discussion emphasized the *original*
+motivation is that having to do a TCP handshake for every embedded
+object in a web page led to so much overhead, independent of TLS,
+that HTTP was eventually optimized to support *persistent connections*
+(also discussed in the next chapter). Because optimizing HTTP
+mitigated the value of session resumption in TLS (plus the realization
+that reusing the same session IDs and master secret key in a series of
+resumed sessions is a security risk), TLS changed its approach to
+resumption in the latest version (1.3).
+
+In TLS 1.3, the client sends an opaque, server-encrypted *session
+ticket*  to the server upon resumption. This ticket contains all the
+information required to resume the session. The same master secret
+is used across handshakes, but the default behavior is to perform a
+session key exchange upon resumption.
+
+{% if output.name == "ebook" %}
+> **Key Takeaway**
+{% else %}
+> [!Note|style:flat|label:Key Takeaway|iconVisibility:hidden]
+{% endif %}
+> We call attention to this change in TLS because it illustrates the
+> challenge of knowing which layer should solve a given problem. In
+> isolation, session resumption as implemented in the earlier version
+> of TLS seems like a good idea, but it needs to be considered in the
+> context of the dominate use case, which is HTTP. Once the overhead
+> of doing multiple TCP connections was addressed by HTTP, the
+> equation for how resumption should be implemented by TLS changed.
 
 ## IP Security (IPsec)
 
