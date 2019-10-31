@@ -111,7 +111,7 @@ mean this to include the case where Alice includes her certificate in
 her first message to Bob, and the case where Bob searches for a
 certificate about Alice when he receives her first message.
 
-.. _fig-KAuthSync:
+.. _fig-pKAuthSync:
 .. figure:: figures/f08-08-9780123850591.png
    :width: 600px
    :align: center
