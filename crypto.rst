@@ -152,21 +152,22 @@ two participants use different keys.)
 
 The U.S. National Institute of Standards and Technology (NIST) has
 issued standards for a series of secret-key ciphers. *Data Encryption
-Standard* (DES) was the first, and it has stood the test of time in that
-no cryptanalytic attack better than brute force search has been
+Standard* (DES) was the first, and it has stood the test of time in
+that no cryptanalytic attack better than brute force search has been
 discovered. Brute force search, however, has gotten faster. DES’s keys
-(56 independent bits) are now too small given current processor speeds.
-DES keys have 56 independent bits (although they have 64 bits in total;
-the last bit of every byte is a parity bit). As noted above, you would,
-on average, have to search half of the space of 2\:sup:`56`possible keys 
-to find the right one, giving 2\ :sup:`55` = 3.6 × 10\ :sup:`16` keys. 
-That may sound like a lot, but such a search is highly
-parallelizable, so it’s possible to throw as many computers at the task
-as you can get your hands on—and these days it’s easy to lay your hands
-on thousands of computers. (Amazon will rent them to you for a few cents
-an hour.) By the late 1990s, it was already possible to recover a DES
-key after a few hours. Consequently, NIST updated the DES standard in
-1999 to indicate that DES should only be used for legacy systems.
+(56 independent bits) are now too small given current processor
+speeds.  DES keys have 56 independent bits (although they have 64 bits
+in total; the last bit of every byte is a parity bit). As noted above,
+you would, on average, have to search half of the space of 2\
+:sup:`56` possible keys to find the right one, giving 2\ :sup:`55` =
+3.6 × 10\ :sup:`16` keys.  That may sound like a lot, but such a
+search is highly parallelizable, so it’s possible to throw as many
+computers at the task as you can get your hands on—and these days it’s
+easy to lay your hands on thousands of computers. (Amazon will rent
+them to you for a few cents an hour.) By the late 1990s, it was
+already possible to recover a DES key after a few hours. Consequently,
+NIST updated the DES standard in 1999 to indicate that DES should only
+be used for legacy systems.
 
 NIST also standardized the cipher *Triple DES* (3DES), which leverages
 the cryptanalysis resistance of DES while in effect increasing the key
@@ -385,7 +386,7 @@ others—then for some messages you could find another message with the
 same digest much more easily than this, which would reduce the
 security of the algorithm. If you were instead just trying to find any
 *collision*—any two messages that produce the same digest—then you
-would need to compute the digests of only 2\:sup:`64` messages, on
+would need to compute the digests of only 2\ :sup:`64` messages, on
 average.  This surprising fact is the basis of the “birthday
 attack”—see the exercises for more details.
 
