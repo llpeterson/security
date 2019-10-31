@@ -18,16 +18,17 @@ countermeasure), but if you are transmitting a message over a fiber link
 between two machines in a locked datacenter, you might trust that
 channel is secure, and so take no additional steps.
 
-You could argue that since you already have a way to protect WiFi-based
-communication you just as well use it to protect the fiber-based
-channel, but that presumes the outcome of a cost/benefit analysis.
-Suppose protecting any message, whether sent over WiFi or fiber, slows
-the communication down by 10% due to the overhead of encryption. If you
-need to squeeze every last ounce of performance out of a scientific
-computation (e.g., you are trying to model a hurricane) and the odds of
-someone breaking into the datacenter is one in a million (and even if
-they did, the data being transmitted has virtually no value), then you
-would be well-justified in not securing the fiber communication channel.
+You could argue that since you already have a way to protect
+WiFi-based communication you just as well use it to protect the
+fiber-based channel, but that presumes the outcome of a cost/benefit
+analysis.  Suppose protecting any message, whether sent over WiFi or
+fiber, slows the communication down by 10% due to the overhead of
+encryption. If you need to squeeze every last ounce of performance out
+of a scientific computation (e.g., you are trying to model a
+hurricane) and the odds of someone breaking into the datacenter are
+one in a million (and even if they did, the data being transmitted has
+little value), then you would be well-justified in not securing the
+fiber communication channel.
 
 These sorts of calculations happen all the time, although they are often
 implicit and unstated. For example, you may run the world’s most secure
